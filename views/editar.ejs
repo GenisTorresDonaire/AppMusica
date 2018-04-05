@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>    
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+  </head>
+  <body>
+  	
+  	<!-- Grey with black text -->
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	  <ul class="navbar-nav">
+	    <li class="nav-item">
+	      <a class="nav-link" href="/canciones">Canciones</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="/canciones/crear">Insertar</a>
+	    </li>
+	    <li class="nav-item active">
+	      <a class="nav-link" href="">Editar</a>
+	    </li>
+	  </ul>
+	</nav>
+
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<h1>Bien vamos a editar!!</h1>
+			</div>
+		</div>
+		<hr>
+
+		<div class="row">
+			<div class="col-md-2">
+				<h3>Datos actuales</h3>
+				<% canciones_llista.forEach( function(canciones) { %>
+			    	<p><h5>Titulo: </h5> <%= canciones.titulo %> </p>
+					<p><h5>Autor: </h5> <%= canciones.autor %> </p>
+					<p><h5>Año: </h5> <%= canciones.año %> </p>
+				<% });	%>
+			</div>
+			<div class="col-md-8">
+				<form action="/canciones/editar" method="post">
+					<div class="form-group">
+						<label>Titulo de la cancion:</label>
+						<input type="text" class="form-control" name="titulo">
+					</div>
+					<div class="form-group">
+						<label>Artista:</label>
+						<input type="text" class="form-control" name="cantante">
+					</div>
+					<div class="form-group">
+						<label>Año:</label>
+						<input type="year" class="form-control" name="año">
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form> 
+			</div>
+		</div>
+	</div>  
+
+  </body>
+</html>

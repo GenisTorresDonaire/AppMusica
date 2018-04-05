@@ -49,11 +49,8 @@ router.get('/canciones/eliminar/:id', function(req,res,next) {
 });
 
 
-
-
 // EDIT FORMULARIO
 router.get('/canciones/editar/:id', function(req, res, next) {
-  
   MongoClient.connect(url, function(err,db){
     if (err) throw err;
     var dbo = db.db(dbnom);
@@ -67,24 +64,32 @@ router.get('/canciones/editar/:id', function(req, res, next) {
       res.render('editar', {canciones_llista: result});
     });
   });
-
-  
 });
 
 
 // EDIT 
 router.post('/canciones/editar', function(req,res,next) {
-    
+    MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db(dbnom);
+
+    // Alternativament : 
+    var objId = new ObjectId(req.body.id);
+    var cancion_obj = { $set : {titulo: req.body.titulo, autor: req.body.cantante, año: parseInt(req.body.año)}};
+
+    dbo.collection("canciones").updateOne( {"_id" : objId}, cancion_obj, function(err, result) {
+      if (err) throw err;
+      db.close();
+      res.redirect('/canciones');
+    });
+  });
 });
-
-
 
 
 // INSERTAR VER FORMULARIO
 router.get('/canciones/crear', function(req, res, next) {
   res.render('insertar');
 });
-
 
 // INSERTAR
 router.post('/canciones/crear', function(req, res, next) {

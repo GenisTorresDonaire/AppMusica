@@ -56,6 +56,11 @@
 						<label>Año:</label>
 						<input type="year" class="form-control" name="año">
 					</div>
+					
+					<% canciones_llista.forEach( function(canciones) { %>
+			    		<input type="hidden" class="form-control" name="id" value="<%= canciones._id %>" >
+					<% });	%>
+
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form> 
 			</div>
